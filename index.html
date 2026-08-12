@@ -275,16 +275,16 @@ function buildEntriesJs(invoices) {
 
   keys.forEach((key, index) => {
     const inv = invoices[key];
-    out += `    ${jsString(key)}: {\\n`;
-    out += `        Customer: ${jsString(inv.Customer)},\\n`;
-    out += `        Address: ${jsString(inv.Address)},\\n`;
-    out += `        Repair: ${jsString(inv.Repair)},\\n`;
-    out += `        Alteration: ${jsString(inv.Alteration)},\\n`;
-    out += `        InvAmount: ${jsString(inv.InvAmount)}\\n`;
-    out += "    }" + (index < keys.length - 1 ? "," : "") + "\\n\\n";
+    out += `    ${jsString(key)}: {\n`;
+    out += `        Customer: ${jsString(inv.Customer)},\n`;
+    out += `        Address: ${jsString(inv.Address)},\n`;
+    out += `        Repair: ${jsString(inv.Repair)},\n`;
+    out += `        Alteration: ${jsString(inv.Alteration)},\n`;
+    out += `        InvAmount: ${jsString(inv.InvAmount)}\n`;
+    out += "    }" + (index < keys.length - 1 ? "," : "") + "\n\n";
   });
 
-  out += "};\\n";
+  out += "};\n";
   return out;
 }
 
