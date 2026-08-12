@@ -248,6 +248,7 @@ function parseEntriesJs(source) {
     };
 
     invoices["invoice#" + number] = {
+      Date: getField("Date"),
       Customer: getField("Customer"),
       Address: getField("Address"),
       Repair: getField("Repair"),
@@ -279,6 +280,7 @@ function buildEntriesJs(invoices) {
   keys.forEach((key, index) => {
     const inv = invoices[key];
     out += `    ${jsString(key)}: {\n`;
+    out +- `.       Date: ${jsString(inv.Date)},\n`;
     out += `        Customer: ${jsString(inv.Customer)},\n`;
     out += `        Address: ${jsString(inv.Address)},\n`;
     out += `        Repair: ${jsString(inv.Repair)},\n`;
@@ -315,6 +317,7 @@ function showStatus(message, type) {
 function updatePreview() {
   const key = $("invoiceNo").value || "invoice#00000";
   const inv = {
+    Date: $("date").value,
     Customer: $("customer").value,
     Address: $("address").value,
     Repair: $("repair").value,
@@ -324,6 +327,7 @@ function updatePreview() {
 
   $("preview").textContent =
 `"${key}": {
+    Date: ${jsString(inv.Date)},
     Customer: ${jsString(inv.Customer)},
     Address: ${jsString(inv.Address)},
     Repair: ${jsString(inv.Repair)},
@@ -416,6 +420,7 @@ $("invoiceForm").addEventListener("submit", async event => {
     const key = formatInvoiceNumber(number);
 
     currentInvoices[key] = {
+      Date: $("date").value.trim(),
       Customer: $("customer").value.trim(),
       Address: $("address").value.trim(),
       Repair: $("repair").value.trim(),
