@@ -280,7 +280,7 @@ function buildEntriesJs(invoices) {
   keys.forEach((key, index) => {
     const inv = invoices[key];
     out += `    ${jsString(key)}: {\n`;
-    out +- `        Date: ${jsString(inv.Date)},\n`;
+    out += `        Date: ${jsString(inv.Date)},\n`;
     out += `        Customer: ${jsString(inv.Customer)},\n`;
     out += `        Address: ${jsString(inv.Address)},\n`;
     out += `        Repair: ${jsString(inv.Repair)},\n`;
