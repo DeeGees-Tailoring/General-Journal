@@ -1,17 +1,1 @@
-const invoices = {
-    "invoice#00001": {
-        Customer: "",
-        Address: "",
-        Repair: "",
-        Alteration: "",
-        InvAmount: ""
-    },
-
-    "invoice#00002": {
-        Customer: "",
-        Address: "",
-        Repair: "",
-        Alteration: "",
-        InvAmount: ""
-    }
-};
+const invoices = {\n    "invoice#00001": {\n        Customer: "",\n        Address: "",\n        Repair: "",\n        Alteration: "",\n        InvAmount: ""\n    },\n\n    "invoice#00002": {\n        Customer: "",\n        Address: "",\n        Repair: "",\n        Alteration: "",\n        InvAmount: ""\n    },\n\n    "invoice#00003": {\n        Customer: "HILDA LORILLA",\n        Address: "Brgy 4, Ma. Aurora, Aurora",\n        Repair: "50",\n        Alteration: "100",\n        InvAmount: "150"\n    }\n\n};\n
