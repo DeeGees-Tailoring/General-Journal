@@ -1,4 +1,6 @@
-const invoices = {\n    "invoice#00000": {
+const invoices = {
+        
+    "invoice#00000": {
         Customer: "",
         Address: "",
         Repair: "",
