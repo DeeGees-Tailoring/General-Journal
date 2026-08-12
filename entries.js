@@ -5,4 +5,5 @@ const invoices = {
         Repair: "",
         Alteration: "",
       InvAmount: "",
+    },
 };
