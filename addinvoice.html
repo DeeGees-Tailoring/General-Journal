@@ -275,7 +275,7 @@ function buildEntriesJs(invoices) {
     return na - nb;
   });
 
-  let out = "const invoices = {\\n";
+  let out = "const invoices = {\n";
 
   keys.forEach((key, index) => {
     const inv = invoices[key];
