@@ -20,6 +20,14 @@ const invoices = {\n    "invoice#00000": {
         Repair: "100",
         Alteration: "",
         InvAmount: "100"
+    },
+
+    "invoice#00003": {
+        Customer: "Vivian Silvestre",
+        Address: "Brgy 4, Ma. Aurora, Aurora",
+        Repair: "",
+        Alteration: "150",
+        InvAmount: "150"
     }
 
 };
