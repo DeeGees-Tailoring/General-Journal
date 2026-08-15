@@ -237,6 +237,13 @@ async function loadEntries() {
                 </div>
 
                 <div class="row">
+                    <div class="label">Made To Order</div>
+                    <div class="value">
+                        ${escapeHTML(inv.MadeToOrder)}
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="label">Invoice Amount</div>
                     <div class="value amount">
                         ${escapeHTML("₱" + inv.InvAmount)}
