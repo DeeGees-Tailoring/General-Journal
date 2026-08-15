@@ -1,1 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Invoice</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+  }
+  .wrap {
+    width: min(680px, calc(100% - 24px));
+    margin: 24px auto 40px;
+  }
+  .card {
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.06);
+    margin-bottom: 16px;
+  }
+  h1 { margin: 0 0 6px; font-size: 28px; }
+  .sub { margin: 0 0 20px; color: #6b7280; }
+  label {
+    display: block;
+    font-weight: 650;
+    margin: 14px 0 7px;
+  }
+  input, textarea, button {
+    width: 100%;
+    font: inherit;
+  }
+  input, textarea {
+    border: 1px solid #cfd6dd;
+    border-radius: 10px;
+    padding: 12px;
+    outline: none;
+    background: #fff;
+  }
+  input:focus, textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  }
+  textarea { min-height: 78px; resize: vertical; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .invoice-no {
+    font-size: 22px;
+    font-weight: 700;
+    background: #f0f7ff;
+  }
+  button {
+    border: 0;
+    border-radius: 11px;
+    padding: 13px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 18px;
+  }
+  #addBtn {
+    background: #2563eb;
+    color: white;
+  }
+  #addBtn:disabled { opacity: .55; cursor: wait; }
+  .secondary {
+    background: #eef1f4;
+    color: #1f2937;
+  }
+  .status {
+    display: none;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 14px;
+    white-space: pre-wrap;
+  }
+  .ok { display: block; background: #ecfdf3; color: #166534; }
+  .err { display: block; background: #fef2f2; color: #991b1b; }
+  .preview {
+    background: #111827;
+    color: #e5e7eb;
+    border-radius: 10px;
+    padding: 14px;
+    overflow: auto;
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .small {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.45;
+  }
+  .danger-note {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    margin-top: 14px;
+  }
+  @media (max-width: 520px) {
+    .grid { grid-template-columns: 1fr; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
 
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <h1>Add Invoice</h1>
+    <p class="sub">Add a new record directly to your GitHub <b>entries.js</b>.</p>
+
+    <div class="grid">
+      <div>
+        <label for="owner">GitHub Owner</label>
+        <input id="owner" value="DeeGees-Tailoring">
+      </div>
+      <div>
+        <label for="repo">Repository</label>
+        <input id="repo" value="General-Journal">
+      </div>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="branch">Branch</label>
+        <input id="branch" value="main">
+      </div>
+      <div>
+        <label for="path">File</label>
+        <input id="path" value="entries.js">
+      </div>
+    </div>
+
+    <label for="token">GitHub Fine-grained PAT</label>
+    <input id="token" type="password" autocomplete="off"
+           placeholder="Paste token here — not saved by this page">
+    <div class="small">
+      The token is used only for this browser session and is cleared after a successful save.
+      Use a fine-grained token limited to this repository with Contents: Read and write.
+    </div>
+
+    <div class="danger-note">
+      Do not put your PAT inside the HTML/JavaScript source or commit it to GitHub.
+      This page keeps the token in memory only.
+    </div>
+  </div>
+
+  <form id="invoiceForm" class="card">
+    <label>Next Invoice Number</label>
+    <input id="invoiceNo" class="invoice-no" readonly>
+
+    <label for="date">Date</label>
+    <input type="date" id="date" required>
+   
+    <label for="customer">Customer</label>
+    <input id="customer" required>
+
+    <label for="address">Address</label>
+    <textarea id="address"></textarea>
+
+    <label for="repair">Repair</label>
+    <textarea id="repair"></textarea>
+
+    <label for="alteration">Alteration</label>
+    <textarea id="alteration"></textarea>
+
+    <label for="amount">Invoice Amount</label>
+    <input id="amount" inputmode="decimal" placeholder="e.g. 850">
+
+    <button id="addBtn" type="submit">ADD INVOICE</button>
+    <button id="refreshBtn" class="secondary" type="button">REFRESH INVOICE NUMBER</button>
+
+    <div id="status" class="status"></div>
+  </form>
+
+  <div class="card">
+    <h3>Preview</h3>
+    <div id="preview" class="preview"></div>
+  </div>
+
+ <button id="viewjournal" type="button">VIEW JOURNAL ENTRIES</button>
+ 
+
+</div>
+
+<script>
+document.getElementById("viewjournal").addEventListener("click", function() {
+    window.location.href = "index.html";
+});
+</script>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+let currentFileSha = null;
+let currentInvoices = {};
+
+function githubHeaders(token) {
+  return {
+    "Accept": "application/vnd.github+json",
+    "Authorization": "Bearer " + token,
+    "X-GitHub-Api-Version": "2022-11-28"
+  };
+}
+
+function base64ToUtf8(base64) {
+  const binary = atob(base64.replace(/\n/g, ""));
+  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+  return new TextDecoder("utf-8").decode(bytes);
+}
+
+function utf8ToBase64(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+
+/*
+  Parses the exact entries.js structure used by this project.
+  It intentionally does NOT use eval()/Function() on repository content.
+*/
+function parseEntriesJs(source) {
+  const invoices = {};
+  const invoiceRegex = /"invoice#(\d+)"\s*:\s*\{([\s\S]*?)\n\s*\}/g;
+  let match;
+
+  while ((match = invoiceRegex.exec(source)) !== null) {
+    const number = match[1];
+    const body = match[2];
+
+    const getField = name => {
+      const re = new RegExp(
+        "\\b" + name + "\\s*:\\s*([\"'])([\\s\\S]*?)\\1"
+      );
+      const m = body.match(re);
+      return m ? m[2] : "";
+    };
+
+    invoices["invoice#" + number] = {
+      Date: getField("Date"),
+      Customer: getField("Customer"),
+      Address: getField("Address"),
+      Repair: getField("Repair"),
+      Alteration: getField("Alteration"),
+      InvAmount: getField("InvAmount")
+    };
+  }
+
+  if (Object.keys(invoices).length === 0) {
+    throw new Error("No invoice records were found in entries.js.");
+  }
+
+  return invoices;
+}
+
+function jsString(value) {
+  return JSON.stringify(String(value ?? ""));
+}
+
+function buildEntriesJs(invoices) {
+  const keys = Object.keys(invoices).sort((a, b) => {
+    const na = Number(a.replace("invoice#", ""));
+    const nb = Number(b.replace("invoice#", ""));
+    return na - nb;
+  });
+
+  let out = "const invoices = {\n";
+
+  keys.forEach((key, index) => {
+    const inv = invoices[key];
+    out += `    ${jsString(key)}: {\n`;
+    out += `        Date: ${jsString(inv.Date)},\n`;
+    out += `        Customer: ${jsString(inv.Customer)},\n`;
+    out += `        Address: ${jsString(inv.Address)},\n`;
+    out += `        Repair: ${jsString(inv.Repair)},\n`;
+    out += `        Alteration: ${jsString(inv.Alteration)},\n`;
+    out += `        InvAmount: ${jsString(inv.InvAmount)}\n`;
+    out += "    }" + (index < keys.length - 1 ? "," : "") + "\n\n";
+  });
+
+  out += "};\n";
+  return out;
+}
+
+function nextInvoiceNumber(invoices) {
+  let max = 0;
+
+  Object.keys(invoices).forEach(key => {
+    const m = key.match(/^invoice#(\d+)$/);
+    if (m) max = Math.max(max, Number(m[1]));
+  });
+
+  return max + 1;
+}
+
+function formatInvoiceNumber(n) {
+  return "invoice#" + String(n).padStart(5, "0");
+}
+
+function showStatus(message, type) {
+  const el = $("status");
+  el.textContent = message;
+  el.className = "status " + type;
+}
+
+function updatePreview() {
+  const key = $("invoiceNo").value || "invoice#00000";
+  const inv = {
+    Date: $("date").value,
+    Customer: $("customer").value,
+    Address: $("address").value,
+    Repair: $("repair").value,
+    Alteration: $("alteration").value,
+    InvAmount: $("amount").value
+  };
+
+  $("preview").textContent =
+`"${key}": {
+    Date: ${jsString(inv.Date)},
+    Customer: ${jsString(inv.Customer)},
+    Address: ${jsString(inv.Address)},
+    Repair: ${jsString(inv.Repair)},
+    Alteration: ${jsString(inv.Alteration)},
+    InvAmount: ${jsString(inv.InvAmount)}
+}`;
+}
+
+async function loadEntries() {
+  const token = $("token").value.trim();
+  const owner = $("owner").value.trim();
+  const repo = $("repo").value.trim();
+  const branch = $("branch").value.trim();
+  const path = $("path").value.trim();
+
+  if (!token) {
+    showStatus("Enter your GitHub PAT first.", "err");
+    return false;
+  }
+
+  const url =
+    `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}` +
+    `/contents/${path.split("/").map(encodeURIComponent).join("/")}?ref=${encodeURIComponent(branch)}`;
+
+  const response = await fetch(url, {
+    headers: githubHeaders(token)
+  });
+
+  if (!response.ok) {
+    let detail = "";
+    try {
+      const data = await response.json();
+      detail = data.message ? " " + data.message : "";
+    } catch (_) {}
+    throw new Error("GitHub could not read entries.js." + detail);
+  }
+
+  const data = await response.json();
+  currentFileSha = data.sha;
+
+  const source = base64ToUtf8(data.content);
+  currentInvoices = parseEntriesJs(source);
+
+  $("invoiceNo").value =
+    formatInvoiceNumber(nextInvoiceNumber(currentInvoices).toString().padStart(5, "0"));
+
+  updatePreview();
+  return true;
+}
+
+$("token").addEventListener("change", () => {
+  if ($("token").value.trim()) {
+    loadEntries().catch(err => showStatus(err.message, "err"));
+  }
+});
+
+["date", "customer", "address", "repair", "alteration", "amount"].forEach(id => {
+  $(id).addEventListener("input", updatePreview);
+});
+
+$("refreshBtn").addEventListener("click", async () => {
+  try {
+    showStatus("Reading entries.js...", "ok");
+    await loadEntries();
+    showStatus("Invoice number refreshed.", "ok");
+  } catch (err) {
+    showStatus(err.message, "err");
+  }
+});
+
+$("invoiceForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const btn = $("addBtn");
+  const token = $("token").value.trim();
+
+  if (!token) {
+    showStatus("Enter your GitHub PAT first.", "err");
+    return;
+  }
+
+  btn.disabled = true;
+  showStatus("Reading the latest entries.js...", "ok");
+
+  try {
+    // Always fetch the latest version immediately before writing.
+    await loadEntries();
+
+    const number = nextInvoiceNumber(currentInvoices);
+    const key = formatInvoiceNumber(number);
+
+    currentInvoices[key] = {
+      Date: $("date").value.trim(),
+      Customer: $("customer").value.trim(),
+      Address: $("address").value.trim(),
+      Repair: $("repair").value.trim(),
+      Alteration: $("alteration").value.trim(),
+      InvAmount: $("amount").value.trim()
+    };
+
+    const newSource = buildEntriesJs(currentInvoices);
+
+    const owner = $("owner").value.trim();
+    const repo = $("repo").value.trim();
+    const branch = $("branch").value.trim();
+    const path = $("path").value.trim();
+
+    const url =
+      `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}` +
+      `/contents/${path.split("/").map(encodeURIComponent).join("/")}`;
+
+    showStatus("Saving " + key + " to GitHub...", "ok");
+
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        ...githubHeaders(token),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "Add " + key,
+        content: utf8ToBase64(newSource),
+        branch: branch,
+        sha: currentFileSha
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "GitHub rejected the update.");
+    }
+
+    currentFileSha = result.content.sha;
+    currentInvoices = parseEntriesJs(newSource);
+
+    $("invoiceNo").value =
+      formatInvoiceNumber(nextInvoiceNumber(currentInvoices).toString().padStart(5, "0"));
+
+    $("invoiceForm").reset();
+    $("invoiceNo").value =
+      formatInvoiceNumber(nextInvoiceNumber(currentInvoices).toString().padStart(5, "0"));
+
+    updatePreview();
+
+    // Do not leave the PAT in the page after a successful commit.
+    $("token").value = "";
+
+    showStatus(
+      key + " was successfully added to entries.js.\nCommit: " +
+      (result.commit && result.commit.sha ? result.commit.sha.slice(0, 7) : "created"),
+      "ok"
+    );
+
+  } catch (err) {
+    showStatus(err.message, "err");
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+updatePreview();
+</script>
+</body>
+</html>
