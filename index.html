@@ -120,13 +120,16 @@
 
     <div id="entries"></div>
 
-    <button id="addBtn" type="button">ADD INVOICE</button>
+    <button id="addInv" type="button">ADD INVOICE</button>
+    <button id="addCD" type="button">ADD CASH DISBURSEMENT</button>
 
 </div>
 
 <script>
-document.getElementById("addBtn").addEventListener("click", function() {
+document.getElementById("addInv").addEventListener("click", function() {
     window.location.href = "addinvoice.html";
+document.getElementById("addCD").addEventListener("click", function() {
+    window.location.href = "addcashdisbursement.html";
 });
 </script>
 
