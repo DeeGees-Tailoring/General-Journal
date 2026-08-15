@@ -546,8 +546,8 @@ $("invoiceForm").addEventListener("submit", async event => {
     currentInvoices[key] = invoice;
 
     const descriptionParts = [];
-    if (invoice.Repair) descriptionParts.push(invoice.Repair);
-    if (invoice.Alteration) descriptionParts.push(invoice.Alteration);
+    if (invoice.Repair) descriptionParts.push("Repair: " + invoice.Repair);
+    if (invoice.Alteration) descriptionParts.push("Alteration: " + invoice.Alteration);
 
     currentEntries[key] = {
       Type: "Invoice",
