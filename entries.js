@@ -7,28 +7,44 @@ const entries = {
         Amount: "1290.58"
     },
 
-    "Invoice#04627": {
+    "Invoice#04622": {
         Type: "Invoice",
-        Date: "2026-08-15",
+        Date: "2026-08-12",
         Category: "Income",
-        Description: "Repair: 50",
-        Amount: "50"
+        Description: "Repair: 150",
+        Amount: "150"
     },
 
-    "Invoice#04628": {
+    "Invoice#04623": {
         Type: "Invoice",
-        Date: "2026-08-15",
+        Date: "2026-08-13",
+        Category: "Income",
+        Description: "Repair: 80",
+        Amount: "80"
+    },
+
+    "Invoice#04624": {
+        Type: "Invoice",
+        Date: "2026-08-13",
         Category: "Income",
         Description: "Alteration: 100",
         Amount: "100"
     },
 
-    "Invoice#04629": {
+    "Invoice#04625": {
         Type: "Invoice",
-        Date: "2026-08-15",
+        Date: "2026-08-14",
         Category: "Income",
-        Description: "Repair: 50 / Alteration: 100",
-        Amount: "150"
-    }
+        Description: "Alteration: 100",
+        Amount: "100"
+},
+
+    "Invoice#04626": {
+        Type: "Invoice",
+        Date: "2026-08-14",
+        Category: "Income",
+        Description: "Repair: 100",
+        Amount: "100"
+}
 
 };
