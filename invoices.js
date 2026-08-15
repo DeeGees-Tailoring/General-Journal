@@ -42,6 +42,15 @@ const invoices = {
         Repair: "100",
         Alteration: "",
         InvAmount: "100"
+    },
+
+    "Invoice#04627": {
+        Date: "2026-08-15",
+        Customer: "HILDA LORILLA",
+        Address: "Hhkl",
+        Repair: "100",
+        Alteration: "",
+        InvAmount: "100"
     }
 
 };
