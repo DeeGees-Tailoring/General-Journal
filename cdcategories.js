@@ -1,5 +1,5 @@
 const categories = [
 
-
+    "Expense (Electricity)"
 
 ];
