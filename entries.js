@@ -1,12 +1,4 @@
 const entries = {
-    "CD#00001": {
-        Type: "Cash Disbursement",
-        Date: "2026-08-15",
-        Category: "Expense",
-        Description: "Electricity",
-        Amount: "1290.58"
-    },
-
     "Invoice#04627": {
         Type: "Invoice",
         Date: "2026-08-15",
@@ -29,6 +21,14 @@ const entries = {
         Category: "Income",
         Description: "Repair: 50 / Alteration: 100",
         Amount: "150"
+    },
+
+    "CD#00001": {
+        Type: "Cash Disbursement",
+        Date: "2026-08-15",
+        Category: "Expense",
+        Description: "Electricity",
+        Amount: "1290.58"
     },
 
     "CD#00002": {
