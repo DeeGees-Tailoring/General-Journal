@@ -42,33 +42,6 @@ const invoices = {
         Repair: "100",
         Alteration: "",
         InvAmount: "100"
-    },
-
-    "Invoice#04627": {
-        Date: "2026-08-15",
-        Customer: "HILDA LORILLA",
-        Address: "Fghk",
-        Repair: "50",
-        Alteration: "",
-        InvAmount: "50"
-    },
-
-    "Invoice#04628": {
-        Date: "2026-08-15",
-        Customer: "AIDA TOKS",
-        Address: "Dghjkl",
-        Repair: "",
-        Alteration: "100",
-        InvAmount: "100"
-    },
-
-    "Invoice#04629": {
-        Date: "2026-08-15",
-        Customer: "Sheila Catipon",
-        Address: "Dfhkk",
-        Repair: "50",
-        Alteration: "100",
-        InvAmount: "150"
     }
 
 };
