@@ -3,7 +3,7 @@ const entries = {
         Type: "Cash Disbursement",
         Date: "2026-08-12",
         Category: "Expense - Electricity",
-        Description: "Electricity",
+        Description: "August bill",
         Amount: "1290.58"
     },
 
