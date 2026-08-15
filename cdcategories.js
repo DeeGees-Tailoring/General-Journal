@@ -1,4 +1,3 @@
-```javascript
 const categories = [
 
     "Rent",
@@ -6,8 +5,6 @@ const categories = [
     "Supplies",
     "Transportation",
     "Repairs",
-    "Salaries",
-    "Bank Charges"
+    "Salaries"
 
 ];
-```
