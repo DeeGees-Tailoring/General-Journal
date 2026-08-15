@@ -1,5 +1,6 @@
 const categories = [
 
-    "Expense (Electricity)"
+    "Expense (Electricity)",
+    "Expense (Market Stall Fee)"
 
 ];
