@@ -5,6 +5,7 @@ const invoices = {
         Address: "Brgy 4, Ma. Aurora, Aurora",
         Repair: "150",
         Alteration: "",
+        MadeToOrder: "",
         InvAmount: "150"
     },
 
@@ -14,6 +15,7 @@ const invoices = {
         Address: "San Jose, Ma. Aurora, Aurora",
         Repair: "80",
         Alteration: "",
+        MadeToOrder: "",
         InvAmount: "80"
     },
 
@@ -23,6 +25,7 @@ const invoices = {
         Address: "Brgy 4, Ma. Aurora, Aurora",
         Repair: "",
         Alteration: "100",
+        MadeToOrder: "",
         InvAmount: "100"
     },
 
@@ -32,6 +35,7 @@ const invoices = {
         Address: "Florida, Ma. Aurora, Aurora",
         Repair: "",
         Alteration: "100",
+        MadeToOrder: "",
         InvAmount: "100"
     },
 
@@ -41,6 +45,7 @@ const invoices = {
         Address: "Brgy 2, Ma. Aurora, Aurora",
         Repair: "100",
         Alteration: "",
+        MadeToOrder: "",
         InvAmount: "100"
     }
 
