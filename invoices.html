@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>General Journal</title>
+<title>INVOICES</title>
 
 <style>
     * {
@@ -112,7 +112,7 @@
 <div class="container">
 
     <h1>DEEGEES TAILORING</h1>
-    <h1>GENERAL JOURNAL</h1>
+    <h1>INVOICES</h1>
 
     <div id="status" class="status">
         Loading entries...
@@ -139,18 +139,18 @@ async function loadEntries() {
 
     try {
 
-        // Basahin ang entries.js
-        const response = await fetch("entries.js", {
+        // Basahin ang invoices.js
+        const response = await fetch("invoices.js", {
             cache: "no-store"
         });
 
         if (!response.ok) {
-            throw new Error("Unable to load entries.js");
+            throw new Error("Unable to load invoices.js");
         }
 
         const code = await response.text();
 
-        // Kunin ang invoices object mula sa entries.js
+        // Kunin ang invoices object mula sa invoices.js
         const invoices = new Function(
             code + "\nreturn invoices;"
         )();
