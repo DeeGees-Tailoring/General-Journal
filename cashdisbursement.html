@@ -216,7 +216,7 @@ async function loadEntries() {
                 </div>
 
                 <div class="row">
-                    <div class="label">Type</div>
+                    <div class="label">Category</div>
                     <div class="value">
                         ${escapeHTML(cd.Type)}
                     </div>
@@ -230,18 +230,13 @@ async function loadEntries() {
                 </div>
 
                 <div class="row">
-                    <div class="label">Alteration</div>
+                    <div class="label">Amount</div>
                     <div class="value">
-                        ${escapeHTML(inv.Alteration)}
+                        ${escapeHTML(cd.Amount)}
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="label">Invoice Amount</div>
-                    <div class="value amount">
-                        ${escapeHTML(inv.InvAmount)}
-                    </div>
-                </div>
+                
 
             `;
 
@@ -255,7 +250,7 @@ async function loadEntries() {
 
         status.innerHTML = `
             <div class="error">
-                Error loading entries.js
+                Error loading cashdisbursements.js
             </div>
         `;
 
