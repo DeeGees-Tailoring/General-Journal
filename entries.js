@@ -1,4 +1,4 @@
-const entries = {
+const invoices = {
     "Invoice#00000": {
         Type: "Invoice",
         Date: "2026-08-15",
