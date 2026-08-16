@@ -144,16 +144,94 @@
     }
 
 /* Hamburger side menu */
-.menu-button{position:fixed;top:15px;left:15px;z-index:1002;width:48px;height:48px;border:0;border-radius:12px;background:#2563eb;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.2);margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.menu-button span{display:block;width:25px;height:4px;background:white;border-radius:2px}
-.side-menu{position:fixed;top:0;left:-290px;width:290px;height:100%;z-index:1001;background:white;box-shadow:4px 0 18px rgba(0,0,0,.18);transition:left .25s ease;overflow-y:auto}
-.side-menu.open{left:0}
-.menu-hero{height:190px;background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),url("https://raw.githubusercontent.com/DeeGees-Tailoring/General-Journal/refs/heads/main/images/heroDG.png");background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:20px;box-sizing:border-box;color:white}
-.menu-hero h2{margin:0;font-size:24px;text-shadow:0 2px 5px rgba(0,0,0,.4)}
-.menu-content{padding:18px}
-.menu-content button{width:100%;display:block;margin:0 0 12px;border:0;border-radius:11px;padding:14px 16px;font-weight:700;font-size:15px;text-align:left;background:#2563eb;color:white;cursor:pointer}
-.menu-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.35);opacity:0;visibility:hidden;transition:opacity .25s ease}
-.menu-overlay.show{opacity:1;visibility:visible}
+.menu-button {
+   position:fixed;
+   top:15px;
+   left:15px;
+   z-index:1002;
+   width:48px;
+   height:48px;
+   border:0;
+   border-radius:12px;
+   background:#2563eb;
+   cursor:pointer;
+   box-shadow:0 3px 10px rgba(0,0,0,.2);
+   margin:0;
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:center;
+   gap:5px
+}
+.menu-button span {
+   display:block;
+   width:25px;
+   height:4px;
+   background:white;
+   border-radius:2px
+}
+.side-menu {
+   position:fixed;
+   top:0;
+   left:-290px;
+   width:290px;
+   height:100%;
+   z-index:1001;
+   background:white;
+   box-shadow:4px 0 18px rgba(0,0,0,.18);
+   transition:left .25s ease;
+   overflow-y:auto
+}
+.side-menu.open {
+   left:0
+}
+.menu-hero {
+   height:190px;
+   background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+      url("https://raw.githubusercontent.com/DeeGees-Tailoring/General-Journal/refs/heads/main/images/heroDG.png");
+   background-size:cover;
+   background-position:center;
+   display:flex;
+   align-items:flex-end;
+   padding:20px;
+   box-sizing:border-box;
+   color:white
+}
+.menu-hero h2 {
+   margin:0;
+   font-size:24px;
+   text-shadow:0 2px 5px rgba(0,0,0,.4)
+}
+.menu-content {
+   padding:18px
+}
+.menu-content button {
+   width:100%;
+   display:block;
+   margin:0 0 12px;
+   border:0;
+   border-radius:11px;
+   padding:14px 16px;
+   font-weight:700;
+   font-size:15px;
+   text-align:left;
+   background:#2563eb;
+   color:white;
+   cursor:pointer
+}
+.menu-overlay {
+   position:fixed;
+   inset:0;
+   z-index:1000;
+   background:rgba(0,0,0,.35);
+   opacity:0;
+   visibility:hidden;
+   transition:opacity .25s ease
+}
+.menu-overlay.show {
+   opacity:1;
+   visibility:visible
+}
 
 </style>
 </head>
@@ -164,106 +242,87 @@
      <span></span>
      <span></span>
   </button>
-  <div class="menu-overlay" id="menuOverlay">
-     What Is This?
-  </div>
-<aside class="side-menu" id="sideMenu">
-  <div class="menu-hero">
-     <h2>DEEGEES TAILORING</h2>
-  </div>
-  
-  <div class="menu-content">
-    <button type="button" onclick="window.location.href='addinvoice.html'">➕ ADD INVOICE</button>
-    <button type="button" onclick="window.location.href='cashdisbursement.html'">💰 VIEW CASH DISBURSEMENTS</button>
-    <button type="button" onclick="window.location.href='invoices.html'">📄 VIEW INVOICES</button>
-    <button type="button" onclick="window.location.href='index.html'">📖 VIEW JOURNAL ENTRIES</button>
-  </div>
-</aside>
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="side-menu" id="sideMenu">
+      <div class="menu-hero">
+         <h2>DEEGEES TAILORING</h2>
+      </div>
+      <div class="menu-content">
+         <button type="button" onclick="window.location.href='addinvoice.html'">➕ ADD INVOICE</button>
+         <button type="button" onclick="window.location.href='cashdisbursement.html'">💰 VIEW CASH DISBURSEMENTS</button>
+         <button type="button" onclick="window.location.href='invoices.html'">📄 VIEW INVOICES</button>
+         <button type="button" onclick="window.location.href='index.html'">📖 VIEW JOURNAL ENTRIES</button>
+      </div>
+   </aside>
+   <div class="container">
+      <h1>DEEGEES TAILORING</h1>
+      <h1>ADD CASH DISBURSEMENT</h1>
+   <div class="card">
+      <div class="grid">
+         <div>
+            <label for="owner">GitHub Owner</label>
+            <input id="owner" value="DeeGees-Tailoring">
+         </div>
+         <div>
+            <label for="repo">Repository</label>
+            <input id="repo" value="General-Journal">
+         </div>
+      </div>
+      <div class="grid">
+         <div>
+            <label for="branch">Branch</label>
+            <input id="branch" value="main">
+         </div>
+         <div>
+            <label for="token">GitHub PAT</label>
+            <input id="token" type="password" placeholder="Paste GitHub Personal Access Token">
+         </div>
+      </div>
+      <div class="grid">
+         <div>
+            <label for="cdPath">Cash Disbursement File</label>
+            <input id="cdPath" value="cashdisbursements.js">
+         </div>
+         <div>
+            <label for="journalPath">Journal File</label>
+            <input id="journalPath" value="entries.js">
+         </div>
+      </div>
+      <button id="refreshBtn" type="button">REFRESH CD NUMBER</button>
+   </div>
+   <div id="status" class="status">
+      Enter your GitHub PAT to load the next cash disbursement number.
+   </div>
+   <form id="cdForm" class="card">
+      <label for="cdNo">Cash Disbursement No.</label>
+      <input id="cdNo" readonly value="CD#00000">
 
+      <label for="date">Date</label>
+      <input id="date" type="date">
 
-<div class="container">
+      <label for="payee">Payee</label>
+      <input id="payee" type="text" placeholder="Who was paid?">
 
-    <h1>DEEGEES TAILORING</h1>
-    <h1>ADD CASH DISBURSEMENT</h1>
+      <label for="category">Category</label>
+      <select id="category">
+         <option value="">Loading categories...</option>
+      </select>
+      <div class="hint">Categories are loaded from categories.js.</div>
 
-    <div class="card">
-        <div class="grid">
-            <div>
-                <label for="owner">GitHub Owner</label>
-                <input id="owner" value="DeeGees-Tailoring">
-            </div>
+      <label for="description">Description</label>
+      <textarea id="description" placeholder="What was the cash disbursement for?"></textarea>
 
-            <div>
-                <label for="repo">Repository</label>
-                <input id="repo" value="General-Journal">
-            </div>
-        </div>
+      <label for="amount">Amount</label>
+      <input id="amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00">
 
-        <div class="grid">
-            <div>
-                <label for="branch">Branch</label>
-                <input id="branch" value="main">
-            </div>
+      <button id="addBtn" type="submit">ADD CASH DISBURSEMENT</button>
 
-            <div>
-                <label for="token">GitHub PAT</label>
-                <input id="token" type="password" placeholder="Paste GitHub Personal Access Token">
-            </div>
-        </div>
+   </form>
 
-        <div class="grid">
-            <div>
-                <label for="cdPath">Cash Disbursement File</label>
-                <input id="cdPath" value="cashdisbursements.js">
-            </div>
-
-            <div>
-                <label for="journalPath">Journal File</label>
-                <input id="journalPath" value="entries.js">
-            </div>
-        </div>
-
-        <button id="refreshBtn" type="button">REFRESH CD NUMBER</button>
-    </div>
-
-    <div id="status" class="status">
-        Enter your GitHub PAT to load the next cash disbursement number.
-    </div>
-
-    <form id="cdForm" class="card">
-
-        <label for="cdNo">Cash Disbursement No.</label>
-        <input id="cdNo" readonly value="CD#00000">
-
-        <label for="date">Date</label>
-        <input id="date" type="date">
-
-        <label for="payee">Payee</label>
-        <input id="payee" type="text" placeholder="Who was paid?">
-
-        <label for="category">Category</label>
-        <select id="category">
-            <option value="">Loading categories...</option>
-        </select>
-        <div class="hint">Categories are loaded from categories.js.</div>
-
-        <label for="description">Description</label>
-        <textarea id="description" placeholder="What was the cash disbursement for?"></textarea>
-
-        <label for="amount">Amount</label>
-        <input id="amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00">
-
-        <button id="addBtn" type="submit">ADD CASH DISBURSEMENT</button>
-
-    </form>
-
-    <div class="card">
-        <h2>Preview</h2>
-        <div id="preview" class="preview"></div>
-    </div>
-
- 
-
+   <div class="card">
+      <h2>Preview</h2>
+      <div id="preview" class="preview"></div>
+   </div>
 </div>
 
 <script>
