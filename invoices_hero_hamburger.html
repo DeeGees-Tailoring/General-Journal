@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>INVOICES</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f2f4f7;
+        color: #1f2937;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .status {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .invoice {
+        background: white;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .invoice h2 {
+        margin-top: 0;
+        color: #2563eb;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .label {
+        font-weight: bold;
+        min-width: 120px;
+    }
+
+    .value {
+        text-align: right;
+        word-break: break-word;
+    }
+
+    .amount {
+        font-weight: bold;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 14px;
+    }
+
+    .error {
+        color: #b91c1c;
+        background: #fee2e2;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+   button {
+    border: 0;
+    border-radius: 11px;
+    padding: 13px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 18px;
+   }
+
+     #addBtn {
+    background: #2563eb;
+    color: white;
+     }
+
+   #addBtn:disabled { opacity: .55; cursor: wait; }
+
+
+.menu-button{position:fixed;top:15px;left:15px;z-index:1002;width:48px;height:48px;border:0;border-radius:12px;background:#2563eb;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.2);margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.menu-button span{display:block;width:25px;height:4px;background:white;border-radius:2px}
+.side-menu{position:fixed;top:0;left:-290px;width:290px;height:100%;z-index:1001;background:white;box-shadow:4px 0 18px rgba(0,0,0,.18);transition:left .25s ease;overflow-y:auto}
+.side-menu.open{left:0}
+.hero{height:190px;background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),url("https://images.unsplash.com/photo-1528712306091-ed0763094c98?auto=format&fit=crop&w=800&q=80");background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:20px;color:white}
+.hero h2{margin:0;font-size:24px;text-shadow:0 2px 5px rgba(0,0,0,.4)}
+.menu-content{padding:18px}
+.menu-content button{width:100%;display:block;margin:0 0 12px;border:0;border-radius:11px;padding:14px 16px;font-weight:700;font-size:15px;text-align:left;background:#2563eb;color:white;cursor:pointer}
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.35);opacity:0;visibility:hidden;transition:opacity .25s ease}
+.overlay.show{opacity:1;visibility:visible}
+
+</style>
+</head>
+
+<body>
+
+<button class="menu-button" id="menuButton" type="button" aria-label="Open menu">
+<span></span><span></span><span></span>
+</button>
+<div class="overlay" id="menuOverlay"></div>
+<aside class="side-menu" id="sideMenu">
+<div class="hero"><h2>DEEGEES TAILORING</h2></div>
+<div class="menu-content">
+<button type="button" onclick="window.location.href='addinvoice.html'">➕ ADD INVOICE</button>
+<button type="button" onclick="window.location.href='index.html'">📖 VIEW JOURNAL ENTRIES</button>
+<button type="button" onclick="window.location.href='cashdisbursement.html'">💰 VIEW CASH DISBURSEMENTS</button>
+</div>
+</aside>
+
+
+<div class="container">
+
+    <h1>DEEGEES TAILORING</h1>
+    <h1>INVOICES</h1>
+
+    <div id="status" class="status">
+        Loading entries...
+    </div>
+
+    <div id="entries"></div>
+
+</div>
+
+
+<script>
+const menuButton=document.getElementById("menuButton");
+const sideMenu=document.getElementById("sideMenu");
+const menuOverlay=document.getElementById("menuOverlay");
+function toggleMenu(){sideMenu.classList.toggle("open");menuOverlay.classList.toggle("show")}
+function closeMenu(){sideMenu.classList.remove("open");menuOverlay.classList.remove("show")}
+menuButton.addEventListener("click",toggleMenu);
+menuOverlay.addEventListener("click",closeMenu);
+</script>
+
+<script>
+
+async function loadEntries() {
+
+    const status = document.getElementById("status");
+    const container = document.getElementById("entries");
+
+    try {
+
+        // Basahin ang invoices.js
+        const response = await fetch("invoices.js", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("Unable to load invoices.js");
+        }
+
+        const code = await response.text();
+
+        // Kunin ang invoices object mula sa invoices.js
+        const invoices = new Function(
+            code + "\nreturn invoices;"
+        )();
+
+        const keys = Object.keys(invoices);
+
+        if (keys.length === 0) {
+
+            status.textContent = "No invoice records found.";
+
+            container.innerHTML = `
+                <div class="empty">
+                    No invoice records yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        // Ayusin ayon sa invoice number
+        keys.sort((a, b) => {
+
+            const na = Number(
+                a.replace("invoice#", "")
+            );
+
+            const nb = Number(
+                b.replace("invoice#", "")
+            );
+
+            return na - nb;
+        });
+
+        status.textContent =
+            `${keys.length} invoice record${keys.length > 1 ? "s" : ""} found.`;
+
+        container.innerHTML = "";
+
+        keys.forEach(key => {
+
+            const inv = invoices[key];
+
+            const card = document.createElement("div");
+
+            card.className = "invoice";
+
+            card.innerHTML = `
+
+                <h2>${escapeHTML(key)}</h2>
+
+                <div class="row">
+                    <div class="label">Date</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Date)}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="label">Customer</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Customer)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Address</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Address)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Repair</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Repair)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Alteration</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Alteration)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Made To Order</div>
+                    <div class="value">
+                        ${escapeHTML(inv.MadeToOrder)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Invoice Amount</div>
+                    <div class="value amount">
+                        ${escapeHTML("₱" + inv.InvAmount)}
+                    </div>
+                </div>
+
+            `;
+
+            container.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.innerHTML = `
+            <div class="error">
+                Error loading entries.js
+            </div>
+        `;
+
+        container.innerHTML = "";
+
+    }
+
+}
+
+
+// Security helper
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+loadEntries();
+
+</script>
+
+</body>
+</html>
