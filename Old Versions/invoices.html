@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>INVOICES</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f2f4f7;
+        color: #1f2937;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .status {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .invoice {
+        background: white;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .invoice h2 {
+        margin-top: 0;
+        color: #2563eb;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .label {
+        font-weight: bold;
+        min-width: 120px;
+    }
+
+    .value {
+        text-align: right;
+        word-break: break-word;
+    }
+
+    .amount {
+        font-weight: bold;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 14px;
+    }
+
+    .error {
+        color: #b91c1c;
+        background: #fee2e2;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+   button {
+    border: 0;
+    border-radius: 11px;
+    padding: 13px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 18px;
+   }
+
+     #addBtn {
+    background: #2563eb;
+    color: white;
+     }
+
+   #addBtn:disabled { opacity: .55; cursor: wait; }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>DEEGEES TAILORING</h1>
+    <h1>INVOICES</h1>
+
+    <div id="status" class="status">
+        Loading entries...
+    </div>
+
+    <div id="entries"></div>
+
+    <button id="addBtn" type="button">ADD INVOICE</button>
+
+</div>
+
+<script>
+document.getElementById("addBtn").addEventListener("click", function() {
+    window.location.href = "addinvoice.html";
+});
+</script>
+
+<script>
+
+async function loadEntries() {
+
+    const status = document.getElementById("status");
+    const container = document.getElementById("entries");
+
+    try {
+
+        // Basahin ang invoices.js
+        const response = await fetch("invoices.js", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("Unable to load invoices.js");
+        }
+
+        const code = await response.text();
+
+        // Kunin ang invoices object mula sa invoices.js
+        const invoices = new Function(
+            code + "\nreturn invoices;"
+        )();
+
+        const keys = Object.keys(invoices);
+
+        if (keys.length === 0) {
+
+            status.textContent = "No invoice records found.";
+
+            container.innerHTML = `
+                <div class="empty">
+                    No invoice records yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        // Ayusin ayon sa invoice number
+        keys.sort((a, b) => {
+
+            const na = Number(
+                a.replace("invoice#", "")
+            );
+
+            const nb = Number(
+                b.replace("invoice#", "")
+            );
+
+            return na - nb;
+        });
+
+        status.textContent =
+            `${keys.length} invoice record${keys.length > 1 ? "s" : ""} found.`;
+
+        container.innerHTML = "";
+
+        keys.forEach(key => {
+
+            const inv = invoices[key];
+
+            const card = document.createElement("div");
+
+            card.className = "invoice";
+
+            card.innerHTML = `
+
+                <h2>${escapeHTML(key)}</h2>
+
+                <div class="row">
+                    <div class="label">Date</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Date)}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="label">Customer</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Customer)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Address</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Address)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Repair</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Repair)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Alteration</div>
+                    <div class="value">
+                        ${escapeHTML(inv.Alteration)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Made To Order</div>
+                    <div class="value">
+                        ${escapeHTML(inv.MadeToOrder)}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">Invoice Amount</div>
+                    <div class="value amount">
+                        ${escapeHTML("₱" + inv.InvAmount)}
+                    </div>
+                </div>
+
+            `;
+
+            container.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.innerHTML = `
+            <div class="error">
+                Error loading entries.js
+            </div>
+        `;
+
+        container.innerHTML = "";
+
+    }
+
+}
+
+
+// Security helper
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+loadEntries();
+
+</script>
+
+</body>
+</html>
