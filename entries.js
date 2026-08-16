@@ -37,7 +37,7 @@ const entries = {
         Category: "Income (Revenue/s)",
         Description: "Alteration: 100",
         Amount: "100"
-},
+    },
 
     "Invoice#04626": {
         Type: "Invoice",
@@ -45,6 +45,14 @@ const entries = {
         Category: "Income (Revenue/s)",
         Description: "Repair: 100",
         Amount: "100"
-}
+    },
+
+    "Invoice#04627": {
+        Type: "Invoice",
+        Date: "2026-08-15",
+        Category: "Income",
+        Description: "280",
+        Amount: "280"
+    }
 
 };
