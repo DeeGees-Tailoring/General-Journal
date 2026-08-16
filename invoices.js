@@ -72,7 +72,7 @@ const invoices = {
     "Invoice#04629": {
         Date: "2026-08-16",
         Customer: "LIEZEL BUADO",
-        Address: "Naubos, Ma. Aurora, Aurora",
+        Address: "Baubo, Ma. Aurora, Aurora",
         Repair: "",
         Alteration: "150",
         MadeToOrder: "",
