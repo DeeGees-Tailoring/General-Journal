@@ -137,6 +137,16 @@ const invoices = {
         Alteration: "",
         MadeToOrder: "",
         InvAmount: "250"
+    },
+
+    "Invoice#04636": {
+        Date: "2026-08-19",
+        Customer: "Rengie Ramos",
+        Address: "Dipaculao, Aurora",
+        Repair: "300",
+        Alteration: "",
+        MadeToOrder: "",
+        InvAmount: "300"
     }
 
 };
