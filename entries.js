@@ -133,6 +133,14 @@ const entries = {
         Category: "Income",
         Description: "50",
         Amount: "50"
+    },
+
+    "CD#00002": {
+        Type: "Cash Disbursement",
+        Date: "2026-08-20",
+        Category: "Expense (Market Stall Fee)",
+        Description: "OR#4927288T",
+        Amount: "1152"
     }
 
 };
