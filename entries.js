@@ -7,6 +7,14 @@ const entries = {
         Amount: "1290.58"
     },
 
+    "CD#00002": {
+        Type: "Cash Disbursement",
+        Date: "2026-08-20",
+        Category: "Expense (Market Stall Fee)",
+        Description: "OR#4927288T",
+        Amount: "1152"
+    },
+
     "Invoice#04622": {
         Type: "Invoice",
         Date: "2026-08-12",
@@ -135,12 +143,12 @@ const entries = {
         Amount: "50"
     },
 
-    "CD#00002": {
-        Type: "Cash Disbursement",
-        Date: "2026-08-20",
-        Category: "Expense (Market Stall Fee)",
-        Description: "OR#4927288T",
-        Amount: "1152"
+    "Invoice#04638": {
+        Type: "Invoice",
+        Date: "2026-08-21",
+        Category: "Income",
+        Description: "50",
+        Amount: "50"
     }
 
 };
