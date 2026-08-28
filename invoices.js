@@ -277,6 +277,16 @@ const invoices = {
         Alteration: "100",
         MadeToOrder: "",
         InvAmount: "100"
+    },
+
+    "Invoice#04650": {
+        Date: "2026-08-28",
+        Customer: "EJ Arevalo",
+        Address: "Quirino, Ma. Aurora, Aurora",
+        Repair: "150",
+        Alteration: "",
+        MadeToOrder: "",
+        InvAmount: "150"
     }
 
 };
