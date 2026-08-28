@@ -267,6 +267,16 @@ const invoices = {
         Alteration: "100",
         MadeToOrder: "",
         InvAmount: "100"
+    },
+
+    "Invoice#04649": {
+        Date: "2026-08-27",
+        Customer: "Grace Delos Trinos",
+        Address: "Brgy 2, Ma. Aurora, Aurora",
+        Repair: "",
+        Alteration: "100",
+        MadeToOrder: "",
+        InvAmount: "100"
     }
 
 };
