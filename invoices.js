@@ -287,6 +287,16 @@ const invoices = {
         Alteration: "",
         MadeToOrder: "",
         InvAmount: "150"
+    },
+
+    "Invoice#04651": {
+        Date: "2026-08-30",
+        Customer: "Raquel Turqueza",
+        Address: "San Jose, Ma. Aurora, Aurora",
+        Repair: "",
+        Alteration: "150",
+        MadeToOrder: "",
+        InvAmount: "150"
     }
 
 };
