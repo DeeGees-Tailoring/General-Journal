@@ -317,6 +317,16 @@ const invoices = {
         Alteration: "250",
         MadeToOrder: "",
         InvAmount: "250"
+    },
+
+    "Invoice#04654": {
+        Date: "2026-09-01",
+        Customer: "Dana Camading",
+        Address: "San Jose, Ma Aurora. Aurora",
+        Repair: "150",
+        Alteration: "",
+        MadeToOrder: "",
+        InvAmount: "150"
     }
 
 };
