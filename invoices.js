@@ -337,6 +337,16 @@ const invoices = {
         Alteration: "",
         MadeToOrder: "",
         InvAmount: "250"
+    },
+
+    "Invoice#04656": {
+        Date: "2026-09-03",
+        Customer: "Edith Riaza",
+        Address: "Brgy 4, Ma. Aurora, Aurora",
+        Repair: "",
+        Alteration: "50",
+        MadeToOrder: "",
+        InvAmount: "50"
     }
 
 };
