@@ -7,22 +7,6 @@ const entries = {
         Amount: "1290.58"
     },
 
-    "CD#00002": {
-        Type: "Cash Disbursement",
-        Date: "2026-08-20",
-        Category: "Expense (Market Stall Fee)",
-        Description: "OR#4927288T",
-        Amount: "1152"
-    },
-
-    "CD#00003": {
-        Type: "Cash Disbursement",
-        Date: "2026-09-11",
-        Category: "Expense (Electricity)",
-        Description: "#11095635",
-        Amount: "850.42"
-    },
-
     "Invoice#04622": {
         Type: "Invoice",
         Date: "2026-08-12",
@@ -149,6 +133,14 @@ const entries = {
         Category: "Income",
         Description: "50",
         Amount: "50"
+    },
+
+    "CD#00002": {
+        Type: "Cash Disbursement",
+        Date: "2026-08-20",
+        Category: "Expense (Market Stall Fee)",
+        Description: "OR#4927288T",
+        Amount: "1152"
     },
 
     "Invoice#04638": {
@@ -351,6 +343,14 @@ const entries = {
         Amount: "350"
     },
 
+    "CD#00003": {
+        Type: "Cash Disbursement",
+        Date: "2026-09-11",
+        Category: "Expense (Electricity)",
+        Description: "#11095635",
+        Amount: "850.42"
+    },
+
     "Invoice#04663": {
         Type: "Invoice",
         Date: "2026-09-11",
@@ -445,6 +445,14 @@ const entries = {
         Category: "Income",
         Description: "200",
         Amount: "200"
+    },
+
+    "CD#00004": {
+        Type: "Cash Disbursement",
+        Date: "2026-09-20",
+        Category: "Expense (Market Stall Fee)",
+        Description: "No.4928123T",
+        Amount: "1152"
     },
 
     "Invoice#04675": {
