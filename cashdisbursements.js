@@ -29,6 +29,14 @@ const cashDisbursements = {
         Category: "Expense (Market Stall Fee)",
         Description: "No.4928123T",
         Amount: "1152"
+    },
+
+    "CD#00005": {
+        Date: "2026-10-12",
+        Payee: "AURELCO",
+        Category: "Expense (Electricity)",
+        Description: "#11141874",
+        Amount: "711.76"
     }
 
 };
