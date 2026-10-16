@@ -565,6 +565,14 @@ const entries = {
         Category: "Income",
         Description: "400",
         Amount: "400"
+    },
+
+    "Invoice#04689": {
+        Type: "Invoice",
+        Date: "2026-10-15",
+        Category: "Income",
+        Description: "140",
+        Amount: "140"
     }
 
 };
