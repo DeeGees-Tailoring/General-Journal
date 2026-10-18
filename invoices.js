@@ -697,6 +697,16 @@ const invoices = {
         Alteration: "300",
         MadeToOrder: "",
         InvAmount: "300"
+    },
+
+    "Invoice#04692": {
+        Date: "2026-10-17",
+        Customer: "Edwin Rillon",
+        Address: "Cabituculan East, Ma Aurora Aurora",
+        Repair: "",
+        Alteration: "200",
+        MadeToOrder: "",
+        InvAmount: "200"
     }
 
 };
